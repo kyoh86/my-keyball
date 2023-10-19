@@ -21,7 +21,7 @@ clone-firmware() {
 patch-firmware() {
   cp -r ./keyball/qmk_firmware/keyboards/keyball ./qmk_firmware/keyboards/keyball
   cp -r ./qmk_firmware/keyboards/keyball/keyball61/keymaps/{via,kyoh86}
-  patch ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86 < kyoh86.patch
+  patch -p0 < kyoh86.patch
 }
 
 build-firmware() {
@@ -29,6 +29,8 @@ build-firmware() {
   make -C qmk_firmware keyball/keyball61:kyoh86
   cp ./qmk_firmware/keyball_keyball61_kyoh86.hex keyball61_kyoh86.hex
 }
+
+set -e
 
 clean
 
