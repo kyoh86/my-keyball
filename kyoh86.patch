@@ -1,14 +1,14 @@
 diff -Naur ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/config.h ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/config.h
---- ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/config.h	2023-10-19 21:08:01.452742660 +0900
-+++ ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/config.h	2023-10-19 21:08:01.452742660 +0900
+--- ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/config.h	2023-10-19 21:16:12.102761981 +0900
++++ ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/config.h	2023-10-19 21:16:12.102761981 +0900
 @@ -34,3 +34,4 @@
  #endif
  
  #define TAP_CODE_DELAY 5
 +#define TAPPING_TERM 200
 diff -Naur ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c
---- ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c	2023-10-19 21:08:01.452742660 +0900
-+++ ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c	2023-10-19 21:12:52.402753368 +0900
+--- ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c	2023-10-19 21:16:12.102761981 +0900
++++ ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c	2023-10-19 21:27:21.172787900 +0900
 @@ -20,38 +20,51 @@
  
  #include "quantum.h"
@@ -34,11 +34,11 @@ diff -Naur ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c ./
 -    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                  KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , S(KC_7)  ,
 -    MO(1)    , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     , KC_RBRC  ,              KC_NUHS, KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_RSFT  ,
 -    _______  , KC_LCTL  , KC_LALT  , KC_LGUI,LT(1,KC_LNG2),LT(2,KC_SPC),LT(3,KC_LNG1),    KC_BSPC,LT(2,KC_ENT),LT(1,KC_LNG2),KC_RGUI, _______ , KC_RALT  , KC_PSCR
-+    KC_EQUAL , KC_1    , KC_2    , KC_3    , KC_4         , KC_5         ,                                   KC_6         , KC_7  , KC_8    , KC_9   , KC_0    , KC_MINS        ,
-+    KC_GRAVE , KC_Q    , KC_W    , KC_E    , KC_R         , KC_T         ,                                   KC_Y         , KC_U  , KC_I    , KC_O   , KC_P    , KC_NUBS        ,
-+    KC_LALT  , KC_A    , KC_S    , KC_D    , KC_F         , KC_G         ,                                   KC_H         , KC_J  , KC_K    , KC_L   , KC_SCLN , LALT(KC_QUOTE) ,
-+    KC_LSFT  , KC_Z    , KC_X    , KC_C    , KC_V         , KC_B         , LCTL(KC_ESC) ,     LCTL(KC_ESC) , KC_N         , KC_M  , KC_COMM , KC_DOT , KC_SLSH , KC_LSFT        ,
-+    KC_LNG2  , KC_LGUI , KC_LBRC , KC_RBRC , LT(1,KC_ESC) , LT(2,KC_SPC) , LT(3,KC_TAB) ,     KC_BSPC      , LT(2,KC_ENT) , KC_NO , KC_NO   , KC_NO  , KC_LGUI , KC_LNG1
++    KC_EQUAL , KC_1    , KC_2    , KC_3    , KC_4         , KC_5         ,                                       KC_6         , KC_7  , KC_8    , KC_9   , KC_0    , KC_MINS          ,
++    KC_GRAVE , KC_Q    , KC_W    , KC_E    , KC_R         , KC_T         ,                                       KC_Y         , KC_U  , KC_I    , KC_O   , KC_P    , KC_NUBS          ,
++    KC_LALT  , KC_A    , KC_S    , KC_D    , KC_F         , KC_G         ,                                       KC_H         , KC_J  , KC_K    , KC_L   , KC_SCLN , LALT_T(KC_QUOTE) ,
++    KC_LSFT  , KC_Z    , KC_X    , KC_C    , KC_V         , KC_B         , LCTL_T(KC_ESC) ,     LCTL_T(KC_ESC) , KC_N         , KC_M  , KC_COMM , KC_DOT , KC_SLSH , KC_LSFT          ,
++    KC_LNG2  , KC_LGUI , KC_LBRC , KC_RBRC , LT(1,KC_ESC) , LT(2,KC_SPC) , LT(3,KC_TAB)   ,     KC_BSPC        , LT(2,KC_ENT) , KC_NO , KC_NO   , KC_NO  , KC_LGUI , KC_LNG1
    ),
  
    [1] = LAYOUT_universal(
@@ -60,11 +60,11 @@ diff -Naur ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c ./
 -    _______  , _______  , KC_4     , KC_5     , KC_6     ,S(KC_SCLN),                                  KC_PGUP  , KC_BTN1  , KC_DOWN  , KC_BTN2  , KC_BTN3  , _______  ,
 -    _______  , _______  , KC_1     , KC_2     , KC_3     ,S(KC_MINS), S(KC_8)  ,            S(KC_9)  , KC_PGDN  , _______  , _______  , _______  , _______  , _______  ,
 -    _______  , _______  , KC_0     , KC_DOT   , _______  , _______  , _______  ,             KC_DEL  , _______  , _______  , _______  , _______  , _______  , _______
-+    KC_NO , KC_F1   , KC_F2 , KC_F3  , KC_F4 , KC_F5 ,                              KC_F6   , KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  ,
-+    KC_NO , KC_NO   , KC_7  , KC_8   , KC_9  , KC_NO ,                              KC_NO   , KC_LEFT , KC_UP   , KC_RGHT , KC_NO   , KC_F12  ,
-+    KC_NO , KC_NO   , KC_4  , KC_5   , KC_6  , KC_NO ,                              KC_PGUP , KC_BTN1 , KC_DOWN , KC_BTN2 , KC_BTN3 , KC_LALT ,
-+    KC_NO , KC_NO   , KC_1  , KC_2   , KC_3  , KC_NO , KC_NO ,             KC_NO  , KC_PGDN , KC_HOME , KC_NO   , KC_END  , KC_NO   , KC_LSFT ,
-+    TO(0) , KC_LGUI , KC_0  , KC_DOT , KC_NO , KC_NO , KC_NO ,             KC_DEL , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_LGUI , KC_NO
++    KC_NO   , KC_F1   , KC_F2 , KC_F3  , KC_F4 , KC_F5 ,                              KC_F6   , KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  ,
++    KC_NO   , KC_NO   , KC_7  , KC_8   , KC_9  , KC_NO ,                              KC_NO   , KC_LEFT , KC_UP   , KC_RGHT , KC_NO   , KC_F12  ,
++    KC_LALT , KC_NO   , KC_4  , KC_5   , KC_6  , KC_NO ,                              KC_PGUP , KC_BTN1 , KC_DOWN , KC_BTN2 , KC_BTN3 , KC_LALT ,
++    KC_LSFT , KC_NO   , KC_1  , KC_2   , KC_3  , KC_NO , KC_NO ,             KC_NO  , KC_PGDN , KC_HOME , KC_NO   , KC_END  , KC_NO   , KC_LSFT ,
++    TO(0)   , KC_LGUI , KC_0  , KC_DOT , KC_NO , KC_NO , KC_NO ,             KC_DEL , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_LGUI , KC_NO
    ),
  
    [3] = LAYOUT_universal(
@@ -73,11 +73,11 @@ diff -Naur ./qmk_firmware/keyboards/keyball/keyball61/keymaps/kyoh86/keymap.c ./
 -    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , _______  , _______  ,                                  CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE , KBC_RST  ,
 -    _______  , _______  , SCRL_DVD , SCRL_DVI , SCRL_MO  , SCRL_TO  , EE_CLR  ,            EE_CLR  , KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , _______  , _______  ,
 -    QK_BOOT    , _______  , KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , _______  ,            _______  , KC_BSPC  , _______  , _______  , _______  , _______  , QK_BOOT
-+    KC_NO   , KC_NO   , KC_NO   , KC_NO    , KC_NO    , KC_NO   ,                                 KC_NO    , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO ,
-+    KC_NO   , KC_NO   , KC_NO   , KC_NO    , KC_NO    , KC_NO   ,                                 KC_NO    , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO ,
-+    KC_LALT , KC_NO   , KC_NO   , KC_NO    , KC_NO    , KC_NO   ,                                 KC_NO    , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO ,
-+    KC_LSFT , KC_NO   , CPI_D1K , CPI_D100 , CPI_I100 , CPI_I1K , KBC_SAVE ,            KBC_RST , SCRL_DVI , SCRL_DVD , KC_NO , KC_NO , KC_NO , KC_NO ,
-+    TO(0)   , KC_LGUI , KC_NO   , KC_NO    , KC_NO    , KC_NO   , KC_NO    ,            KC_NO   , KC_NO    , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO
++    TO(1)   , KC_NO   , KC_NO   , KC_NO    , KC_NO    , KC_NO   ,                                 KC_NO    , KC_NO    , KC_NO , KC_NO , KC_NO   , KC_NO   ,
++    KC_NO   , KC_NO   , KC_NO   , KC_NO    , KC_NO    , KC_NO   ,                                 KC_NO    , KC_NO    , KC_NO , KC_NO , KC_NO   , KC_NO   ,
++    KC_LALT , KC_NO   , KC_NO   , KC_NO    , KC_NO    , KC_NO   ,                                 KC_NO    , KC_NO    , KC_NO , KC_NO , KC_NO   , KC_LALT ,
++    KC_LSFT , KC_NO   , CPI_D1K , CPI_D100 , CPI_I100 , CPI_I1K , KBC_SAVE ,            KBC_RST , SCRL_DVI , SCRL_DVD , KC_NO , KC_NO , KC_NO   , KC_LSFT ,
++    TO(0)   , KC_LGUI , KC_NO   , KC_NO    , KC_NO    , KC_NO   , KC_NO    ,            KC_NO   , KC_NO    , KC_NO    , KC_NO , KC_NO , KC_LGUI , KC_NO
    ),
  };
  // clang-format on
